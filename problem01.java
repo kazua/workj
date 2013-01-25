@@ -1,3 +1,6 @@
+//http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%201
+//K.A
+
 public class problem01 {
 	public static int get3and5Sum(int last) {
 		int intSum = 0;
