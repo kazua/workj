@@ -8,26 +8,28 @@ import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 
 public class zipCreate {
-	public static void zipFileMake(String dir, String zipfile) throws Exception {
+	private static void zipFileMake(String dir, String zipfile)
+			throws Exception {
 		ZipOutputStream zo = new ZipOutputStream(new FileOutputStream(zipfile));
 		zo.setEncoding("MS932");
 		File tgtdir = new File(dir);
 		File[] tgtpaths = tgtdir.listFiles();
 		for (int i = 0; i < tgtpaths.length; i++) {
-			zipFileMakeProc(zo, tgtpaths[i],"");
+			zipFileMakeProc(zo, tgtpaths[i], "");
 		}
 		zo.flush();
 		zo.close();
 	}
-	private static void zipFileMakeProc(ZipOutputStream zo, File path, String hrc)
-			throws Exception {
+	private static void zipFileMakeProc(ZipOutputStream zo, File path,
+			String hrc) throws Exception {
 		if (path.isDirectory()) {
 			File[] files = path.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				zipFileMakeProc(zo, files[i], hrc + path.getName() + "/");
 			}
 		} else {
-			ZipEntry entry = new ZipEntry(hrc + path.getName().replace("\\", "/"));
+			ZipEntry entry = new ZipEntry(hrc
+					+ path.getName().replace("\\", "/"));
 			zo.putNextEntry(entry);
 			byte buf[] = new byte[1024];
 			int size;
