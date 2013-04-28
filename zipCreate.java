@@ -1,3 +1,5 @@
+//write kazua
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +11,8 @@ import org.apache.tools.zip.ZipOutputStream;
 
 public class zipCreate {
 	private void zipFileMake(String dir, String zipfile) throws Exception {
+		File zippath = new File(zipfile);
+		if (!zippath.getParentFile().exists()) zippath.getParentFile().mkdirs();
 		ZipOutputStream zo = new ZipOutputStream(new FileOutputStream(zipfile));
 		zo.setEncoding("MS932");
 		File tgtdir = new File(dir);
