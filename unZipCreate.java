@@ -10,7 +10,8 @@ import org.apache.tools.zip.ZipFile;
 public class unZipCreate {
 	private void unZipFileMake(String zpp, String odr) throws Exception {
 		ZipFile zfp = new ZipFile(zpp, "MS932");
-		File opd = new File(odr);
+		String zfn = new File(zpp).getName();
+		File opd = new File(odr + "/" + zfn.substring(0, zfn.lastIndexOf('.')));
 		if (!opd.exists()) opd.mkdirs();
 
 		Enumeration ele = zfp.getEntries();
