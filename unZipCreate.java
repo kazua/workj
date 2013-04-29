@@ -14,10 +14,10 @@ public class unZipCreate {
 		File opd = new File(odr + "/" + zfn.substring(0, zfn.lastIndexOf('.')));
 		if (!opd.exists()) opd.mkdirs();
 
-		Enumeration ele = zfp.getEntries();
+		Enumeration enm = zfp.getEntries();
 
-		while (ele.hasMoreElements()) {
-			ZipEntry ent = (ZipEntry) ele.nextElement();
+		while (enm.hasMoreElements()) {
+			ZipEntry ent = (ZipEntry) enm.nextElement();
 			InputStream ins = zfp.getInputStream(ent);
 			unZipFileMakeProc(ent, opd, ins);
 			ins.close();
