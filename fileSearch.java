@@ -9,11 +9,8 @@ public class fileSearch {
 		File file = new File(path);
 		if (!file.isDirectory()) file = file.getParentFile();
 		for (File fc : file.listFiles()) {
-			if (fc.isDirectory()) {
-				pl.addAll(getFiles(fc.getPath()));
-			} else {
-				pl.add(fc.getPath());
-			}
+			if (fc.isDirectory()) pl.addAll(getFiles(fc.getPath()));
+			else pl.add(fc.getPath());
 		}
 		return pl;
 	}
