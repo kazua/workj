@@ -1,0 +1,139 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ビンゴの抽選プログラム</title>
+<style type="text/css">
+.tablenl {
+	border-collapse: collapse;
+	border: 1px black solid;
+}
+
+.tablenl td {
+	border: 1px black solid;
+	color: black;
+	width: 18px;
+	font-size: 20px;
+}
+
+.num {
+	font-size: 80px;
+	font-family: "sans-serif";
+	width: 120px;
+	text-align: center;
+}
+</style>
+<script type="text/javascript">
+    //filterを使用可能に設定
+    if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun) {
+            "use strict";
+            if (this == null)
+                throw new TypeError();
+            var t = Object(this), len = t.length >>> 0;
+            if (typeof fun != "function")
+                throw new TypeError();
+            var res = [], thisp = arguments[1];
+            for ( var i = 0; i < len; i++) {
+                if (i in t) {
+                    var val = t[i];
+                    if (fun.call(thisp, val, i, t))
+                        res.push(val);
+                }
+            }
+            return res;
+        };
+    }
+
+    var numl = range(1, 99);
+    var snml = [];
+
+    function range(begin, end) {
+        var lst = [];
+        for (i = begin; i <= end; ++i)
+            lst.push(i);
+        return lst;
+    }
+    function sleep(ms) {
+        var ds = new Date().getTime();
+        var de = new Date().getTime();
+        while (de < ds + ms) {
+            de = new Date().getTime();
+        }
+        return;
+    }
+    function init() {
+        document.getElementById("bingo").focus();
+    }
+    function bingo(cnt) {
+        var timer;
+        var rd = Math.floor(Math.random() * numl.length);
+        var sln = numl[rd];
+        document.getElementById("number").value = sln;
+
+        if (cnt < 50){
+            timer = setTimeout("bingo("+(cnt+1)+")",100);
+        }else{
+            clearTimeout(timer);
+            bingoproc();
+        }
+        
+        return;
+    }
+    function bingoproc() {
+        var sln = document.getElementById("number").value;
+        numl = numl.filter(function(value) {
+            return value != sln
+        });
+        if (numl.length == 0) {
+            document.getElementById("bingo").disabled = !document
+                    .getElementById("bingo").disabled;
+            document.getElementById("clear").disabled = !document
+                    .getElementById("clear").disabled;
+            document.getElementById("clear").focus();
+        }
+        var newtbl = document.createElement("table");
+        newtbl.className = "tablenl";
+        for (i = 0; i < snml.length; ++i) {
+            if (i % 10 == 0) {
+                var row = newtbl.insertRow(-1);
+            }
+            var td = row.insertCell(-1);
+            var textnode = document.createTextNode(snml[i]);
+            td.appendChild(textnode);
+        }
+        var otn = document.getElementById("snl").childNodes;
+        if (otn.length == 1)
+            document.getElementById("snl").removeChild(otn.item(0));
+        document.getElementById("snl").appendChild(newtbl);
+        snml.push(sln);
+        document.getElementById("bingo").focus();
+    }
+    function reset() {
+        numl = range(1, 99);
+        var otn = document.getElementById("snl").childNodes;
+        if (otn.length == 1)
+            document.getElementById("sn").removeChild(otn.item(0));
+        if (document.getElementById("bingo").disabled == true) {
+            document.getElementById("bingo").disabled = !document
+                    .getElementById("bingo").disabled;
+            document.getElementById("clear").disabled = !document
+                    .getElementById("clear").disabled;
+            document.getElementById("bingo").focus();
+        }
+    }
+</script>
+</head>
+<body onload="init();">
+    <br />ビンゴ抽選プログラム
+    <br />
+    <br />
+    <button type="button" id="bingo" onClick="bingo(0);">次の番号は…</button>
+    <br />
+    <button type="button" id="clear" onClick="reset();" disabled>初期化</button>
+    <br />
+    <input type="text" class="num" id="number" readonly>
+    <br />
+    <br /> 今までの番号一覧
+    <div id="snl"></div>
+</body>
+</html>
