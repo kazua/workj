@@ -1,7 +1,7 @@
 //write kazua
 
 if (!Array.prototype.contains) {
-	Array.prototype.contain = function(value) {
+	Array.prototype.contains = function(value) {
 		for ( var i = 0; i < this.length; i++)
 			if (this[i] === value)
 				return true;
