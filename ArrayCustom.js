@@ -14,7 +14,7 @@ if (!Array.prototype.distinct) {
 		if (len == 0)
 			return this;
 		for ( var i = 0; i < t.length; i++)
-			if (!nt.contain(t[i]))
+			if (!nt.contains(t[i]))
 				nt.push(t[i]);
 
 		return nt;
