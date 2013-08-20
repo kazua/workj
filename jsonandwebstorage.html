@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 //write kazua
-
+ 
 var json = '{"record": ['
     + '{"name": "Yusuke Sasaki",   "score": {"japanese" : 74, "english" : 65}},'
     + '{"name": "Kazuki Tajima",   "score": {"japanese" : 61, "english" : 87}},'
@@ -18,30 +18,30 @@ function jsontest() {
         obj = JSON.parse(json);
     }
     for(i =0; i<obj.record.length; i++){
-		document.getElementById("savetext").value += "名前：" + obj.record[i].name + "\n" + " 国語：" + obj.record[i].score.japanese + "\n" + " 英語：" + obj.record[i].score.english + "\n";
-	}
+        document.getElementById("savetext").value += "名前：" + obj.record[i].name + "\n" + " 国語：" + obj.record[i].score.japanese + "\n" + " 英語：" + obj.record[i].score.english + "\n";
+    }
 }
 function savewebstorage(){
-	if (window.localStorage)
-		window.localStorage.setItem("stg",document.getElementById("savetext").value);
+    if (window.localStorage)
+        window.localStorage.setItem("stg",document.getElementById("savetext").value);
 }
 function readwebstorage(){
-	if (window.localStorage)
-		document.getElementById("readtext").value = window.localStorage.getItem("stg");
+    if (window.localStorage)
+        document.getElementById("readtext").value = window.localStorage.getItem("stg");
 }
 </script>
 </head>
 <body>
-	<input type="button" id="json" onclick="jsontest();" value="JSON読取">
-	<br />
-	<input type="button" id="savedata" onclick="savewebstorage();"
-		value="webstorageに保存">
-	<br />
-	<textarea id="savetext" rows="10" cols="30"></textarea>
-	<br />
-	<input type="button" id="readdata" onclick="readwebstorage();"
-		value="webstorageを読取">
-	<br />
-	<textarea id="readtext" rows="10" cols="30"></textarea>
+    <input type="button" id="json" onclick="jsontest();" value="JSON読取">
+    <br />
+    <input type="button" id="savedata" onclick="savewebstorage();"
+        value="webstorageに保存">
+    <br />
+    <textarea id="savetext" rows="10" cols="30"></textarea>
+    <br />
+    <input type="button" id="readdata" onclick="readwebstorage();"
+        value="webstorageを読取">
+    <br />
+    <textarea id="readtext" rows="10" cols="30"></textarea>
 </body>
 </html>
