@@ -1,16 +1,17 @@
 import java.util.*;
 
+//write kazua
 public class java8ListMap{
 	public static void main(String[] args){
 		List<String> l = new ArrayList<String>(Arrays.asList("a","b","c"));
-		l.forEach(s -> System.out.println(s));//Listの要素に対してラムダ式で処理を実施
+		l.forEach(System.out::println);//Listの要素に対してラムダ式で処理を実施
 		l.sort((o1,o2) -> o2.compareTo(o1));//Listの要素をラムダ式の条件でソート
-		l.forEach(s -> System.out.println(s));
+		l.forEach(System.out::println);
 		l.replaceAll(s -> s.toUpperCase());//Listの要素をラムダ式で更新
-		l.forEach(s -> System.out.println(s));
+		l.forEach(System.out::println);
 		l.removeIf(s -> s.startsWith("B"));//Listの要素をラムダ式の条件で削除
-		l.forEach(s -> System.out.println(s));
-		l.stream().map(s -> s + "z").forEach(s -> System.out.println(s));//ListをStreamに変換
+		l.forEach(System.out::println);
+		l.stream().map(s -> s + "z").forEach(System.out::println);//ListをStreamに変換
 
 		Map<String,String> m = new HashMap<>();
 		m.put("a","test1");
